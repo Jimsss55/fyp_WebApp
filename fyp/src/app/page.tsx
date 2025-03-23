@@ -1,4 +1,4 @@
-"use client"; // Mark this as a client component
+"use client";
 
 import React, { useState } from "react";
 import { loginUser } from "./utils/auth";
@@ -34,7 +34,7 @@ export default function Login() {
       const data = await loginUser(username, password); // Send credentials to backend
       document.cookie = `accessToken=${data.access_token}; path=/; secure; max-age=3600`;
       alert("Login successful");
-      window.location.href = "../home";
+      window.location.href = "./userManagement";
     } catch (err) {
       setError("Invalid username or password");
       console.error("Login failed:", err);

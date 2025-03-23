@@ -1,0 +1,178 @@
+/* Feedback Management Page */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Feedback List */
+.feedback-list {
+  max-height: 500px; /* Adjust height as needed */
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Feedback Item */
+.feedback-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.feedback-item.read {
+  background-color: #e0f7fa; /* Light blue background for read feedback */
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.timestamp {
+  font-size: 14px;
+  color: #666;
+}
+
+.feedback-message {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Mark as Read Button */
+.mark-as-read-button {
+  background-color: #f27121;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mark-as-read-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.mark-as-read-button:hover:not(:disabled) {
+  background-color: #e65c1a;
+}
+
+/* Separator */
+.separator {
+  height: 1px;
+  background-color: #ddd;
+  margin-top: 10px;
+}
+/* Feedback Management Page */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Feedback List */
+.feedback-list {
+  max-height: 500px; /* Adjust height as needed */
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Feedback Item */
+.feedback-item {
+  margin-bottom: 15px;
+  padding: 40px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.timestamp {
+  font-size: 14px;
+  color: #666;
+}
+
+.feedback-message {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Separator */
+.separator {
+  height: 1px;
+  background-color: #ddd;
+  margin-top: 30px;
+}
