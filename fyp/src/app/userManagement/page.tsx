@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import "./user.css";
 import { fetchUsers } from "../api/users/fetchUsers";
+import { deleteuser } from "../api/users/deleteUser";
 
 // Define the User interface
 interface User {
@@ -19,7 +20,6 @@ export default function UserManagementPage() {
   const [filteredUsers, setFilteredUsers] = useState(users);
 
   // Fetch users from backend
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,9 +58,32 @@ export default function UserManagementPage() {
   };
 
   // Handle delete user
-  const handleDeleteUser = (id: number) => {
-    const updatedUsers = filteredUsers.filter((user: User) => user.id !== id);
-    setFilteredUsers(updatedUsers);
+  const handleDeleteUser = async (id: number) => {
+    try {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this user?"
+      );
+      if (!confirmDelete) {
+        return; // Exit if the user cancels the deletion
+      }
+
+      // Retrieve the token from cookies
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("accessToken="))
+        ?.split("=")[1];
+
+      if (!token) {
+        console.error("Access token not found");
+        return;
+      }
+
+      const deletedUserData = await deleteuser(id, token);
+      setFilteredUsers(deletedUserData);
+      setUsers(deletedUserData);
+    } catch (error) {
+      console.error("Error deleting user", error);
+    }
   };
 
   // Calculate stats
