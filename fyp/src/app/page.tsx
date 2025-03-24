@@ -33,7 +33,6 @@ export default function Login() {
     try {
       const data = await loginUser(username, password); // Send credentials to backend
       document.cookie = `accessToken=${data.access_token}; path=/; secure; max-age=3600`;
-      alert("Login successful");
       window.location.href = "./userManagement";
     } catch (err) {
       setError("Invalid username or password");
