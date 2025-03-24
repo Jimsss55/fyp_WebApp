@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { loginUser } from "./utils/auth";
+import { loginUser } from "./api/auth/loginUser";
 import Image from "next/image";
 
 type Styles = {

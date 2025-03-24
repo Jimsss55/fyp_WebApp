@@ -1,50 +1,75 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./user.css";
-// Mock data for users
-const users = [
-  { id: 1, username: "john_doe", email: "john@example.com", gender: "Male" },
-  { id: 2, username: "jane_doe", email: "jane@example.com", gender: "Female" },
-  {
-    id: 3,
-    username: "alice_smith",
-    email: "alice@example.com",
-    gender: "Female",
-  },
-  { id: 4, username: "bob_johnson", email: "bob@example.com", gender: "Male" },
-];
+import { fetchUsers } from "../api/users/fetchUsers";
+
+// Define the User interface
+interface User {
+  id: number;
+  username: string;
+  gender: string;
+  dob: string;
+  role_id: number;
+}
 
 export default function UserManagementPage() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [filteredUsers, setFilteredUsers] = React.useState(users);
+  const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState(users);
+
+  // Fetch users from backend
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // retrieve the token from cookies
+        const token = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("accessToken="))
+          ?.split("=")[1];
+
+        if (!token) {
+          console.error("Access token not found");
+          return;
+        }
+
+        const data = await fetchUsers(token);
+
+        const usersWithRole1 = data.filter((user: User) => user.role_id === 1);
+        setUsers(usersWithRole1);
+        setFilteredUsers(usersWithRole1);
+      } catch (error) {
+        console.error("Error fetching users", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle search input change
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
 
-    const filtered = users.filter(
-      (user) =>
-        user.username.toLowerCase().includes(query) ||
-        user.email.toLowerCase().includes(query)
+    const filtered = users.filter((user: User) =>
+      user.username.toLowerCase().includes(query)
     );
     setFilteredUsers(filtered);
   };
 
   // Handle delete user
   const handleDeleteUser = (id: number) => {
-    const updatedUsers = filteredUsers.filter((user) => user.id !== id);
+    const updatedUsers = filteredUsers.filter((user: User) => user.id !== id);
     setFilteredUsers(updatedUsers);
   };
 
   // Calculate stats
   const totalUsers = filteredUsers.length;
   const maleUsers = filteredUsers.filter(
-    (user) => user.gender === "Male"
+    (user: User) => user.gender === "Male"
   ).length;
   const femaleUsers = filteredUsers.filter(
-    (user) => user.gender === "Female"
+    (user: User) => user.gender === "Female"
   ).length;
 
   return (
@@ -82,17 +107,17 @@ export default function UserManagementPage() {
         <thead>
           <tr>
             <th>Username</th>
-            <th>Email ID</th>
             <th>Gender</th>
+            <th>DoB</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
+          {filteredUsers.map((user: User) => (
             <tr key={user.id}>
               <td>{user.username}</td>
-              <td>{user.email}</td>
               <td>{user.gender}</td>
+              <td>{user.dob}</td>
               <td>
                 <button
                   className="delete-button"
