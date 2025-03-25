@@ -1,6 +1,6 @@
 export const fetchUsers = async (token: string) => {
   try {
-    const response = await fetch("http://localhost:3000/users", {
+    const response = await fetch("http://localhost:3000/api/user/users", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
