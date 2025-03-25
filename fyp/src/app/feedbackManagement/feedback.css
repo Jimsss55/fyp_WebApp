@@ -29,9 +29,11 @@ h1 {
 /* Feedback Item */
 .feedback-item {
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
+  position: relative; /* Added for absolute positioning of button */
+  padding-right: 140px; /* Added space for button */
 }
 
 .feedback-item.read {
@@ -54,7 +56,6 @@ h1 {
 .user-info {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
 .username {
@@ -70,6 +71,7 @@ h1 {
 .feedback-message {
   font-size: 14px;
   color: #333;
+  margin-right: 20px; /* Added to prevent text from touching button */
 }
 
 /* Mark as Read Button */
@@ -84,6 +86,10 @@ h1 {
   display: flex;
   align-items: center;
   gap: 5px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .mark-as-read-button:disabled {
@@ -99,9 +105,23 @@ h1 {
 .separator {
   height: 1px;
   background-color: #ddd;
-  margin-top: 10px;
+  margin-top: 30px;
 }
-/* Feedback Management Page */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feedback-item {
+    padding-right: 20px;
+    padding-bottom: 60px; /* Added space for button at bottom */
+  }
+
+  .mark-as-read-button {
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    transform: none;
+  }
+} /* Feedback Management Page */
 h1 {
   text-align: center;
   margin-bottom: 20px;
@@ -132,9 +152,15 @@ h1 {
 /* Feedback Item */
 .feedback-item {
   margin-bottom: 15px;
-  padding: 40px;
+  padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
+  position: relative; /* Added for absolute positioning of button */
+  padding-right: 140px; /* Added space for button */
+}
+
+.feedback-item.read {
+  background-color: #e0f7fa; /* Light blue background for read feedback */
 }
 
 .feedback-header {
@@ -168,6 +194,34 @@ h1 {
 .feedback-message {
   font-size: 14px;
   color: #333;
+  margin-right: 20px; /* Added to prevent text from touching button */
+}
+
+/* Mark as Read Button */
+.mark-as-read-button {
+  background-color: #f27121;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mark-as-read-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.mark-as-read-button:hover:not(:disabled) {
+  background-color: #e65c1a;
 }
 
 /* Separator */
@@ -175,4 +229,19 @@ h1 {
   height: 1px;
   background-color: #ddd;
   margin-top: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feedback-item {
+    padding-right: 20px;
+    padding-bottom: 60px; /* Added space for button at bottom */
+  }
+
+  .mark-as-read-button {
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    transform: none;
+  }
 }

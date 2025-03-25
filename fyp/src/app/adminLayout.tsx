@@ -1,10 +1,12 @@
-// app/AdminLayout.tsx
+"use client";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { FaUsers, FaCommentDots } from "react-icons/fa"; // Import icons
+import { FaUsers, FaCommentDots, FaSignOutAlt } from "react-icons/fa";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +28,16 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Clear the access token cookie
+    document.cookie =
+      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    // Redirect to login page
+    router.push("src/app/page.tsx");
+  };
+
   return (
     <html lang="en">
       <body
@@ -55,6 +67,10 @@ export default function AdminLayout({
                 </Link>
               </li>
             </ul>
+            <div className="divider"></div>
+            <button className="logout-button" onClick={handleLogout}>
+              <FaSignOutAlt className="icon" /> Logout
+            </button>
           </nav>
           <main className="content">{children}</main>
         </div>
